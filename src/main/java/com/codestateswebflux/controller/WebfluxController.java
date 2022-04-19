@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/chats")
+@RequestMapping("/api/v0/chats")
 public class WebfluxController {
 
     @Autowired
@@ -20,6 +20,5 @@ public class WebfluxController {
     public ResponseEntity getChat(){
         Chats chats = webfluxService.getMessage();
         return new ResponseEntity<>(chats, HttpStatus.OK);
-//        return webfluxService.getMessage();
     }
 }
