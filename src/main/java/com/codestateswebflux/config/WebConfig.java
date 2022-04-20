@@ -16,6 +16,6 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 public class WebConfig implements WebFluxConfigurer {
     @Bean
     public RouterFunction<ServerResponse> routes(WebfluxHandler handler) {
-        return RouterFunctions.route(GET("/webflux/chats"), handler::getChats);
+        return RouterFunctions.route(GET("/hello"), handler::getChats);
     }
 }
