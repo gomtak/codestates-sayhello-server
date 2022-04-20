@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 public class WebfluxService {
 
     public Chats getMessage(){
-        return new Chats("name","message");
+        return new Chats("name","message","");
     }
 }

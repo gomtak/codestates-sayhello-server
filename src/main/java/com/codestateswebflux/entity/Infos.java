@@ -1,10 +1,8 @@
 package com.codestateswebflux.entity;
 
-public class Chats {
+public class Infos {
 
     private String name;
-
-    private String message;
 
     private String job;
 
@@ -16,14 +14,6 @@ public class Chats {
         this.name = name;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
     public String getJob() {
         return job;
     }
@@ -32,9 +22,5 @@ public class Chats {
         this.job = job;
     }
 
-    public Chats(String name, String message, String job) {
-        this.name = name;
-        this.message = message;
-        this.job = job;
-    }
+
 }
