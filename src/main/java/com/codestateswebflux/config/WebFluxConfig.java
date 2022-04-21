@@ -13,7 +13,7 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 
 @Configuration
 @EnableWebFlux
-public class WebConfig implements WebFluxConfigurer {
+public class WebFluxConfig implements WebFluxConfigurer {
     @Bean
     public RouterFunction<ServerResponse> routes(WebfluxHandler handler) {
         return RouterFunctions.route(GET("/hello"), handler::getChats);

@@ -9,30 +9,21 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
+
 @Component
 public class WebfluxHandler {
-    private final WebClient webClient;
-
-    public WebfluxHandler(WebClient webClient) {
-        this.webClient = webClient;
-    }
+    private final WebClient webClient = WebClient.create("http://localhost:8081");
 
     public Mono<ServerResponse> getChats(ServerRequest request) {
 
         String name = request.queryParam("name").get();
 
+        Mono<Map> info = webClient.get()
+                .uri("/info")
+                .retrieve().bodyToMono(Map.class);
+        Mono<Chats> message = info.map(m-> new Chats(name,"hello " + name, (String) m.get("job")));
 
-        Mono<Infos> info = webClient.get()
-                .uri(uriBuilder ->
-                        uriBuilder.path("/info")
-                                .build()
-                ).retrieve().bodyToMono(Infos.class);
-
-        Mono<String> job = info.map(i -> i.getJob()).log();
-
-        Chats message = new Chats(name, "hello " + name, job.toString());
-
-
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(message);
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(message,Chats.class);
     }
 }
